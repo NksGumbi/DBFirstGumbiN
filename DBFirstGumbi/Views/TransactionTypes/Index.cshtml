@@ -1,0 +1,37 @@
+﻿@model IEnumerable<DBFirstGumbi.Models.TransactionType>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Transaction Types</h1>
+
+TransactionTypeId
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionTypeName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionTypeName)
+            </td>
+            <td>
+                    <a asp-action="Details" asp-route-id="@item.TransactionTypeId" class="btn btn-sm btn-primary ml-1">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

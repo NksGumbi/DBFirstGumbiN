@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DBFirstGumbi.Models.Client>
+
+@{
+    ViewData["Title"] = "Index";
+
+    Pager pager = new Pager();
+
+    int pageNo = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-success ml-1">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientId)
+            </th>
+            <th>
+                <i class="@ViewData["SortIconName"]" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortexpression="@ViewData["SortParamName"]">
+                @Html.DisplayNameFor(model => model.Name)
+                </a>
+            </th>
+            <th>
+                <i class="@ViewData["SortIconSurname"]" arial-hidden="true"></i>
+                <a asp-action="Index" asp-route-sortexpression="@ViewData["SortParamName"]">
+                @Html.DisplayNameFor(model => model.Surname)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientBalance)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientBalance)
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a asp-action="Edit" asp-route-id="@item.ClientId" class="btn btn-sm btn-info">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.ClientId" class="btn btn-sm btn-primary ml-1">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.ClientId" class="btn btn-sm btn-danger ml-1">Delete</a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<partial name="_Pager" model="@pager" />
